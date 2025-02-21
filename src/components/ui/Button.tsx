@@ -24,7 +24,7 @@ import type { ReactElement } from "react";
      "md":"py-2 px-4 text-md rounded-md",
      "lg":"py-4 px-6 text-xl rounded-sm"
  }
- const defaultStyles = "rounded-md font-light flex"
+ const defaultStyles = "rounded-md font-light flex hover:opacity-60"
  
  export const Button = (props : ButtonProps) => {
 
