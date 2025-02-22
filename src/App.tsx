@@ -9,8 +9,6 @@ function App() {
 
   return (
       <>
-        {/* <Dashboard/> */}
-        {/* <Signup/> */}
         <BrowserRouter>
            <Routes>
               <Route path='/signup' element={<Signup/>}/>
