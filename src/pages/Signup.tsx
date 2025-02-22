@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { Input } from "../components/CreateContentModal";
-import { Button } from "../components/ui/Button";
-import { BACKEND_URL } from "../config";
+import { Input } from "../components/Modal/CreateContentModal";
+import { Button } from "../components/Button/Button";
+import { BACKEND_URL } from "../../config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +29,7 @@ export function Signup(){
             <Input placeholder="Username"  refe = {userNameRef}/>
             <Input placeholder="Password" refe={passwordRef}/>
             <div className="flex justify-center pt-4">
-                <Button onClick={handleClick}  variant="primary" text="Signup" fullWidth= {true} loading = {true}/>
+                <Button onClick={handleClick}  variant="primary" text="Signup" fullWidth= {true} loading = {true}  size = "md"/>
             </div>
 
         </div>

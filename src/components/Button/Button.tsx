@@ -27,17 +27,18 @@ import type { ReactElement } from "react";
  const defaultStyles = "rounded-md font-light flex hover:opacity-60"
  
  export const Button = (props : ButtonProps) => {
+  const {fullWidth,variant,size,startIcon,text,endIcon,loading} = props
 
     return <button 
             disabled={props.loading}
             onClick={props.onClick}
-            className={`${props.loading ? "opacity-45 " : "" } ${props.fullWidth ? " w-full flex justify-center items-center ":"" } ${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}}}`}>  
+            className={`${loading ? "opacity-45 " : "" } ${fullWidth ? " w-full flex justify-center items-center ":"" } ${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]}}}`}>  
               <div className="flex justify-center items-center">
-                {props.startIcon}
+                {startIcon}
                  <div className="pl-2 pr-2">
-                    {props.text}
+                    {text}
                  </div>
-                {props.endIcon}
+                {endIcon}
               </div>
            </button>
  }

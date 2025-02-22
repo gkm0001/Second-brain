@@ -1,8 +1,8 @@
 import { useRef, useState, type MouseEventHandler } from "react"
-import { CrossIcon } from "../icons/CrossIcon";
-import { Button } from "./ui/Button";
+import { CrossIcon } from "../../icons/CrossIcon";
+import { Button } from "../Button/Button";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../../config";
 
 interface modalProps {
      open ?: boolean;
@@ -57,11 +57,13 @@ export function CreateContentModal({open , onClose} : modalProps){
                      <Button text = "Youtube"
                      variant={type === ContentType.Youtube ? "primary": "secondary"}
                      onClick={()=>{setType(ContentType.Youtube)}} 
+                     size = "md"
                      >
                      </Button>
                      <Button text = "Twitter"
                      variant={type === ContentType.Twitter ? "primary": "secondary"}
-                     onClick={()=>{setType(ContentType.Twitter)}} 
+                     onClick={()=>{setType(ContentType.Twitter)}}
+                     size = "md" 
                      >
                      </Button>
                      </div>

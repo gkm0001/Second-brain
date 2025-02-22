@@ -1,7 +1,7 @@
 import { BrainIcon } from "../../icons/Brain";
 import { FacebookIcon } from "../../icons/Facebook";
 import { Twitter } from "../../icons/Twitter";
-import { SidebarItems } from "./SidebarItems";
+import { SidebarItems } from "../SidebarItem/SidebarItems";
 
 export function Sidebar(){
     return <div className="h-screen bg-white border-r w-72 fixed left-0 pl-6">
