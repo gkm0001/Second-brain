@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../components/ui/Button'
 import { PlusIcon } from '../icons/PlusIcon'
 import { ShareIcon } from '../icons/ShareIcon'
@@ -6,11 +6,17 @@ import { Card } from '../components/ui/Card'
 import { CreateContentModal } from '../components/CreateContentModal'
 import { Sidebar } from '../components/ui/Sidebar'
 import { useContent } from '../hooks/useContent'
+import axios from 'axios'
+import { BACKEND_URL } from '../config'
 
 function Dashboard() {
   const [modalOpen , setModalOpen] = useState<boolean>(false)
-  const contents = useContent();
+  const {contents,refersh} = useContent();
 
+
+  useEffect(()=>{
+     refersh();
+  },[modalOpen])
   return (
       <>
         <Sidebar/>
@@ -24,8 +30,16 @@ function Dashboard() {
          size = "sm" 
          variant="primary" 
          text="Share brain"
-         onClick={()=>{
-           setModalOpen(true)
+         onClick={async()=>{
+           const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share/`, {
+               share : true
+            }, {
+               headers:{
+                 "Authorization":localStorage.getItem("item")
+               }
+            })
+            const shareUrl = `http://localhost:5173/${response.data.hash}`;
+
          }}
          />
 
@@ -39,9 +53,10 @@ function Dashboard() {
        </div>
       
       
-      <div className='flex gap-4'>
-        {contents.map(({type,link,title})=> 
+      <div className='flex gap-4 flex-wrap'>
+        {contents?.map(({type,link,title}, index)=> 
             <Card 
+             key={index}
              type={type}
              link={link}
              title={title}/>

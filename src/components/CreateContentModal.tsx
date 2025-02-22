@@ -16,7 +16,7 @@ enum ContentType {
 export function CreateContentModal({open , onClose} : modalProps){
    const titleRef = useRef<HTMLInputElement>(null);
    const linkRef = useRef<HTMLInputElement>(null);
-   const [type , setType]  = useState("youtube")
+   const [type , setType]  = useState(ContentType.Youtube)
 
 
    const addContent = async() => {
@@ -33,15 +33,13 @@ export function CreateContentModal({open , onClose} : modalProps){
                 "Authorization":localStorage.getItem("token")
              }
           })
+          onClose;
    }
     
     return <div>
          {open && 
-           <div>
-             
-               
-         <div className="w-full h-screen bg-slate-200 fixed top-0 left-0 opacity-60 flex justify-center">
-                 
+           <div>          
+             <div className="w-full h-screen bg-slate-200 fixed top-0 left-0 opacity-60 flex justify-center">     
              </div>
              <div className="w-full h-screen  fixed top-0 left-0 flex justify-center">
              <div className="flex items-center justify-center">
@@ -61,9 +59,9 @@ export function CreateContentModal({open , onClose} : modalProps){
                      onClick={()=>{setType(ContentType.Youtube)}} 
                      >
                      </Button>
-                     <Button text = "Youtube"
-                     variant={type === ContentType.Youtube ? "primary": "secondary"}
-                     onClick={()=>{setType(ContentType.Youtube)}} 
+                     <Button text = "Twitter"
+                     variant={type === ContentType.Twitter ? "primary": "secondary"}
+                     onClick={()=>{setType(ContentType.Twitter)}} 
                      >
                      </Button>
                      </div>
