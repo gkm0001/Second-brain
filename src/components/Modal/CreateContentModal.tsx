@@ -2,7 +2,8 @@ import { useRef, useState, type MouseEventHandler } from "react"
 import { CrossIcon } from "../../icons/CrossIcon";
 import { Button } from "../Button/Button";
 import axios from "axios";
-import { BACKEND_URL } from "../../../config";
+import { Input } from "../Input/Input";
+// import { BACKEND_URL } from "../../../config";
 
 interface modalProps {
      open ?: boolean;
@@ -22,9 +23,8 @@ export function CreateContentModal({open , onClose} : modalProps){
    const addContent = async() => {
        const title = titleRef.current?.value;
        const link = linkRef.current?.value;
-          const [type , setType] = useState(ContentType.Youtube);
 
-          await axios.post(`${BACKEND_URL}/api/v1/content`,{
+          await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/content/uploadContent`,{
              link,
              title,
              type
@@ -48,8 +48,8 @@ export function CreateContentModal({open , onClose} : modalProps){
                          <CrossIcon size="md"/>
                    </div> 
                    <div>
-                       <Input placeholder="Title" refe = {titleRef}/>
-                       <Input placeholder="Link" refe={linkRef}/>
+                       <Input placeholder="Title" ref = {titleRef}/>
+                       <Input placeholder="Link" ref={linkRef}/>
                     </div>  
                     <div>
                      <h1>Type</h1>
@@ -81,12 +81,4 @@ export function CreateContentModal({open , onClose} : modalProps){
         }
 
     </div>
-}
-
-
-
-export function Input({placeholder,refe} : {refe? : any, placeholder : string}) {
-     return <div>
-        <input placeholder={placeholder} type={"text"} className="px-4 py-2 border rounded m-3"  ref = {refe}></input>
-     </div>
 }

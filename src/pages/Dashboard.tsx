@@ -11,7 +11,7 @@ import { BACKEND_URL } from '../../config'
 
 function Dashboard() {
   const [modalOpen , setModalOpen] = useState<boolean>(false)
-  const {contents,refersh} = useContent();
+  const {refersh} = useContent();
 
 
   useEffect(()=>{
@@ -29,7 +29,7 @@ function Dashboard() {
          startIcon={<PlusIcon size={'md'}/>} 
          size = "sm" 
          variant="primary" 
-         text="Share brain"
+         text="Add Content"
          onClick={async()=>{
            const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share/`, {
                share : true
@@ -47,7 +47,7 @@ function Dashboard() {
           startIcon={<ShareIcon size={'md'}/>}
           size = "md" 
           variant="secondary" 
-          text="Add content"
+          text="Share Brain"
           onClick={()=>{}}
           />
        </div>

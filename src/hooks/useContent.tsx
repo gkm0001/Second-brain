@@ -6,7 +6,7 @@ import axios from "axios";
      const [contents , setContents] = useState([]);
 
      function refersh(){
-          axios.get(`${BACKEND_URL}/api/v1/content`, {
+          axios.get(`${BACKEND_URL}/api/v1/content/allcontent`, {
                headers : {
                     "Authorization":localStorage.getItem("token")
                }
