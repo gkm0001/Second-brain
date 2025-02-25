@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { BrainIcon } from "../../icons/Brain";
 import { FacebookIcon } from "../../icons/Facebook";
 import { Twitter } from "../../icons/Twitter";
 import { SidebarItems } from "../SidebarItem/SidebarItems";
 
-export function Sidebar(){
+export const Sidebar = memo(() => {
     return <div className="h-screen bg-white border-r w-72 fixed left-0 pl-6">
          <div className="flex text-2xl pt-4 items-center">
             <div className="pr-4 text-purple-700">
@@ -19,4 +20,4 @@ export function Sidebar(){
           </div>
 
     </div>
-}
+});

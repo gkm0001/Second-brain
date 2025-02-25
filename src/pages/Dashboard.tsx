@@ -7,11 +7,11 @@ import { CreateContentModal } from '../components/Modal/CreateContentModal'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { useContent } from '../hooks/useContent'
 import axios from 'axios'
-import { BACKEND_URL } from '../../config'
+import Cards from './Cards'
 
 function Dashboard() {
   const [modalOpen , setModalOpen] = useState<boolean>(false)
-  const {refersh} = useContent();
+  const {contents , refersh} = useContent();
 
 
   useEffect(()=>{
@@ -21,8 +21,8 @@ function Dashboard() {
       <>
         <Sidebar/>
          <div className='p-4 ml-72 h-min-screen bg-gray-100 border-2'>
-       <CreateContentModal open={modalOpen} onClose={()=>{
-         setModalOpen(false)
+            <CreateContentModal open={modalOpen} onClose={()=>{
+            setModalOpen(false)
        }}/>
        <div className='flex justify-end gap-4'>
        <Button 
@@ -30,39 +30,41 @@ function Dashboard() {
          size = "sm" 
          variant="primary" 
          text="Add Content"
-         onClick={async()=>{
-           const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share/`, {
-               share : true
-            }, {
-               headers:{
-                 "Authorization":localStorage.getItem("item")
-               }
-            })
-            const shareUrl = `http://localhost:5173/${response.data.hash}`;
-
-         }}
+         onClick={()=> setModalOpen(true)}
          />
 
-       <Button    
+        <Button    
           startIcon={<ShareIcon size={'md'}/>}
-          size = "md" 
+          size="md" 
           variant="secondary" 
           text="Share Brain"
-          onClick={()=>{}}
-          />
+          onClick={async () => {
+            try {
+              const response = await axios.post(
+                `${import.meta.env.VITE_BACKEND_URL}api/v1/brain/share/`, 
+                { share: true }, 
+                {
+                  headers: {
+                    "Authorization": localStorage.getItem("item"),
+                  },
+                }
+              );
+              const shareUrl = `http://localhost:5173/${response.data.hash}`;
+              console.log("Share URL:", shareUrl); // You can handle the share URL as needed
+            } catch (error) {
+              console.error("Error sharing brain:", error);
+            }
+          }}
+        />
+
        </div>
       
       
       <div className='flex gap-4 flex-wrap'>
-        {/* {contents?.map(({type,link,title}, index)=> 
-            <Card 
-             key={index}
-             type={type}
-             link={link}
-             title={title}/>
-        )} */}
-          <Card title='first tweet' type='twitter' link='https://x.com/nitesh_singh5/status/1889650524921733533'/>
-          <Card title='first video' type='youtube' link='https://www.youtube.com/watch?v=6q3NVJYAJdY&list=RD-FGYMkL_u-g&index=4'/>
+         <Cards/>
+
+          {/* <Card title='first tweet' type='twitter' link='https://x.com/nitesh_singh5/status/1889650524921733533'/>
+          <Card title='first video' type='youtube' link='https://www.youtube.com/watch?v=6q3NVJYAJdY&list=RD-FGYMkL_u-g&index=4'/> */}
       </div>
       
     </div>
