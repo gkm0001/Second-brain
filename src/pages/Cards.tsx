@@ -7,8 +7,8 @@ const Cards = React.memo(() => {
 
   return (
     <>
-      {contents?.map(({ type, link, title }) => (
-        <Card key={link} type={type} link={link} title={title} />
+      {contents?.map(({ type, link, title } , index) => (
+        <Card key={index} type={type} link={link} title={title}/>
       ))}
     </>
   );

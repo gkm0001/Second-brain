@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Button } from '../components/Button/Button'
 import { PlusIcon } from '../icons/PlusIcon'
 import { ShareIcon } from '../icons/ShareIcon'
-import { Card } from '../components/Card/Card'
 import { CreateContentModal } from '../components/Modal/CreateContentModal'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { useContent } from '../hooks/useContent'
@@ -11,11 +10,10 @@ import Cards from './Cards'
 
 function Dashboard() {
   const [modalOpen , setModalOpen] = useState<boolean>(false)
-  const {contents , refersh} = useContent();
-
+  const { refresh} = useContent();
 
   useEffect(()=>{
-     refersh();
+     refresh();
   },[modalOpen])
   return (
       <>

@@ -66,8 +66,8 @@ export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
               <CrossIcon size="md" />
             </div>
             <div>
-              <Input placeholder="Title" ref={titleRef} />
-              <Input placeholder="Link" ref={linkRef} />
+              <Input placeholder="Title" refe={titleRef} />
+              <Input placeholder="Link" refe={linkRef} />
             </div>
             <div>
               <h1>Type</h1>

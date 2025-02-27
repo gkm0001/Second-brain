@@ -4,10 +4,11 @@ interface CardProps {
      title : string;
      link : string;
      type : "twitter" | "youtube"
+     key : any
 }
 
-export function Card({title , link , type} : CardProps){
-     return <div>
+export function Card({title , link , type , key} : CardProps){
+     return <div key={key}>
          <div className="bg-white rounded-md p-8 max-w-72 border-gray-200 border min-h-48 min-w-72">
             <div className="flex justify-between">
                     <div className="flex items-center text-md">

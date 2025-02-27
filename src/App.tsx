@@ -3,20 +3,33 @@ import './App.css'
 import Dashboard from './pages/Dashboard'
 import { Signin } from './pages/Signin'
 import { Signup } from './pages/Signup'
+import ProtectedRoute from './Auth/ProtectedRoute'
+import { RecoilRoot } from 'recoil'
 
 function App() {
  
 
   return (
       <>
-        <BrowserRouter>
-           <Routes>
-              <Route path='/signup' element={<Signup/>}/>
-              <Route path='/login' element={<Signin/>}/>
-              <Route path='/dashboard' element={<Dashboard/>}/>
-              <Route path='/share/:shareId' element={<Dashboard/>}/>
-           </Routes>
-        </BrowserRouter>
+       <RecoilRoot>
+      <BrowserRouter>
+          
+            <Routes>
+              {/* Public Routes */}
+                <Route path='/signup' element={<Signup/>}/>
+                <Route path='/login' element={<Signin/>}/>
+
+                {/* Private Routes */}
+              <Route element={<ProtectedRoute/>}>
+                <Route path='/' element={<Dashboard/>}/>
+                {/* <Route path='/share/:shareId' element={<Dashboard/>}/> */}
+              </Route>
+            </Routes>
+         
+        </BrowserRouter> 
+        </RecoilRoot>  
+      
+    
       </>
   )
 }
