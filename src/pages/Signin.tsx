@@ -3,8 +3,6 @@ import { Button } from "../components/Button/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input/Input";
-import { useSetRecoilState } from "recoil";
-import { AuthState } from "../Auth/Auth";
 
  
 
@@ -12,7 +10,6 @@ export function Signin() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const setAuth = useSetRecoilState(AuthState);
   const navigate = useNavigate();
 
   async function handleClick() {
@@ -29,10 +26,6 @@ export function Signin() {
       );
       const jwt = response.data.token;
       localStorage.setItem("token", jwt);
-      setAuth({
-        isAuthenticated: true,
-      });
-
       navigate("/");
     } catch (error) {
       console.error("Signin failed:", error);
