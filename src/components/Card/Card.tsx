@@ -35,9 +35,7 @@ export function Card({ title, link, type }: CardProps) {
             <YouTubeEmbed url={link} width="100%" />
         )}
         {type === "twitter" && (
-            <div style={{ overflow: 'visible' }}>
-                <XEmbed url={link} width="100%" />
-            </div>
+                <XEmbed url={link} width="100%" style={{ overflow: 'visible' }}/>
             
         )}
       </div>
