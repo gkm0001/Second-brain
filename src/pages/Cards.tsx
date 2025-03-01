@@ -2,16 +2,20 @@ import React from "react";
 import { useContent } from "../hooks/useContent";
 import {Card} from "../components/Card/Card";
 
-const Cards = React.memo(() => {
+const Cards = () => {
   const { contents } = useContent();
 
   return (
-    <>
-      {contents?.map(({ type, link, title } , index) => (
-        <Card key={index} type={type} link={link} title={title}/>
-      ))}
-    </>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+     
+      {
+         contents.map(({type,link , title}) => (
+            <Card type={type} link={link}  title={title}/>
+         ))
+      }
+     
+    </div>
   );
-});
+};
 
 export default Cards;

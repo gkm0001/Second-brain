@@ -1,8 +1,9 @@
-import { memo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { CrossIcon } from "../../icons/CrossIcon";
 import { Button } from "../Button/Button";
 import axios from "axios";
 import { Input } from "../Input/Input";
+import { useContent } from "../../hooks/useContent";
 
 interface ModalProps {
   open?: boolean;
@@ -14,11 +15,13 @@ enum ContentType {
   Twitter = "twitter",
 }
 
-export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
+export const CreateContentModal = ({ open, onClose }: ModalProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
   const [type, setType] = useState(ContentType.Youtube);
   const [loading, setLoading] = useState(false);
+
+    const { refresh} = useContent();
 
   const addContent = async () => {
     try {
@@ -43,7 +46,8 @@ export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
         }
       );
 
-      // alert("Content uploaded successfully!");
+      alert("Content uploaded successfully!");
+      // await refresh();
        if (onClose) onClose();
      
     } catch (error) {
@@ -100,4 +104,4 @@ export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
       </div>
     </div>
   );
-});
+};

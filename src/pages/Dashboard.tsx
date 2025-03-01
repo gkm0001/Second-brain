@@ -7,14 +7,16 @@ import { Sidebar } from '../components/Sidebar/Sidebar'
 import { useContent } from '../hooks/useContent'
 import axios from 'axios'
 import Cards from './Cards'
+import { Card } from '../components/Card/Card'
 
 function Dashboard() {
   const [modalOpen , setModalOpen] = useState<boolean>(false)
-  const { refresh} = useContent();
-
-  useEffect(()=>{
-     refresh();
-  },[modalOpen])
+    const { refresh , contents } = useContent();
+    useEffect(()=>{
+      refresh()
+    },[modalOpen])
+ 
+  
   return (
       <>
         <Sidebar/>
@@ -58,12 +60,9 @@ function Dashboard() {
        </div>
       
       
-      <div className='flex gap-4 flex-wrap'>
-         <Cards/>
-
-          {/* <Card title='first tweet' type='twitter' link='https://x.com/nitesh_singh5/status/1889650524921733533'/>
-          <Card title='first video' type='youtube' link='https://www.youtube.com/watch?v=6q3NVJYAJdY&list=RD-FGYMkL_u-g&index=4'/> */}
-      </div>
+        <div className='flex gap-4 flex-wrap'>
+              <Cards/>  
+        </div>
       
     </div>
       </>
