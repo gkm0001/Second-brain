@@ -11,12 +11,7 @@ import { Card } from '../components/Card/Card'
 
 function Dashboard() {
   const [modalOpen , setModalOpen] = useState<boolean>(false)
-    const { refresh , contents } = useContent();
-    useEffect(()=>{
-      refresh()
-    },[modalOpen])
- 
-  
+
   return (
       <>
         <Sidebar/>

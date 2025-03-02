@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { memo, type ReactElement } from "react";
 
  type Variants = "primary" | "secondary"
 
@@ -26,7 +26,7 @@ import type { ReactElement } from "react";
  }
  const defaultStyles = "rounded-md font-light flex hover:opacity-60"
  
- export const Button = (props : ButtonProps) => {
+ export const Button = memo((props : ButtonProps) => {
   const {fullWidth,variant,size,startIcon,text,endIcon,loading,onClick} = props
 
     return <button 
@@ -41,7 +41,7 @@ import type { ReactElement } from "react";
                 {endIcon}
               </div>
            </button>
- }
+ })
 
  
 

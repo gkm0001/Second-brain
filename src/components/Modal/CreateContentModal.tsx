@@ -15,7 +15,7 @@ enum ContentType {
   Twitter = "twitter",
 }
 
-export const CreateContentModal = ({ open, onClose }: ModalProps) => {
+export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
   const [type, setType] = useState(ContentType.Youtube);
@@ -47,7 +47,7 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
       );
 
       alert("Content uploaded successfully!");
-      // await refresh();
+      await refresh();
        if (onClose) onClose();
      
     } catch (error) {
@@ -104,4 +104,4 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
       </div>
     </div>
   );
-};
+});

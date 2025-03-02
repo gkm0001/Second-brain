@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export function useContent() {
+export const  useContent =() => {
   const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string|null>(null);
+
+  console.log("How many times");
+  
 
   async function refresh() {
     try {
@@ -23,13 +26,11 @@ export function useContent() {
   }
 
   useEffect(() => {
-    refresh();
-    const interval = setInterval(() => {
-      refresh();
-    }, 10 * 1000);
+  refresh();
+     
 
     return () => {
-      clearInterval(interval);
+      console.log("no run");
     };
   }, []);
 
