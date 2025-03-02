@@ -6,10 +6,8 @@ export const  useContent =() => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string|null>(null);
 
-  console.log("How many times");
-  
-
   async function refresh() {
+    console.log("How many times");
     try {
       setLoading(true);
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/content/allcontent`, {
@@ -17,6 +15,8 @@ export const  useContent =() => {
           "Authorization": localStorage.getItem("token")
         }
       });
+      console.log(res.data.content);
+      
       setContents(res.data.content);
     } catch (err) {
       setError("Failed to load content");
@@ -27,8 +27,6 @@ export const  useContent =() => {
 
   useEffect(() => {
   refresh();
-     
-
     return () => {
       console.log("no run");
     };

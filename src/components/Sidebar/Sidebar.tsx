@@ -5,22 +5,9 @@ import { Twitter } from "../../icons/Twitter";
 import { SidebarItems } from "../SidebarItem/SidebarItems";
 import { useNavigate } from "react-router-dom";
 
-/**
- * Sidebar Component
- * 
- * This component renders a fixed sidebar that includes a logo, navigation links,
- * and a logout button. It uses React.memo for performance optimization.
- *
- * @component
- * @returns {JSX.Element} The Sidebar component
- */
 export const Sidebar = memo(() => {
    const navigate = useNavigate();
  
-   /**
-    * Logs out the user by removing the authentication token from local storage,
-    * dispatching a storage event to notify all open tabs, and navigating to the home page.
-    */
    const logout = () => {
       localStorage.removeItem("token");
       window.dispatchEvent(new Event("storage")); // Notify all tabs

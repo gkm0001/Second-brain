@@ -1,13 +1,13 @@
-import { memo, useEffect, useRef, useState } from "react";
-import { CrossIcon } from "../../icons/CrossIcon";
-import { Button } from "../Button/Button";
-import axios from "axios";
-import { Input } from "../Input/Input";
-import { useContent } from "../../hooks/useContent";
+// CreateContentModal.jsx
+import { useRef, useState } from "react"
+import { CrossIcon } from "../../icons/CrossIcon"
+import { Button } from "../Button/Button"
+import { Input } from "../Input/Input"
+import useContentStore from "../../store/contentStore"
 
 interface ModalProps {
-  open?: boolean;
-  onClose?: () => void;
+  open?: boolean
+  onClose?: () => void
 }
 
 enum ContentType {
@@ -15,51 +15,35 @@ enum ContentType {
   Twitter = "twitter",
 }
 
-export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
-  const titleRef = useRef<HTMLInputElement>(null);
-  const linkRef = useRef<HTMLInputElement>(null);
-  const [type, setType] = useState(ContentType.Youtube);
-  const [loading, setLoading] = useState(false);
-
-    const { refresh} = useContent();
-
-  const addContent = async () => {
-    try {
-      setLoading(true);
-      const title = titleRef.current?.value;
-      const link = linkRef.current?.value;
-
-      console.log({ title, link, type });
-
-      if (!title || !link) {
-        alert("Title and link are required.");
-        return;
-      }
-
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}api/v1/content/uploadContent`,
-        { link, type, title },
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
-
-      alert("Content uploaded successfully!");
-      await refresh();
-       if (onClose) onClose();
-     
-    } catch (error) {
-      console.error("Error uploading content:", error);
-      alert("Failed to upload content. Please try again.");
-    } finally {
-      setLoading(false);
+export const CreateContentModal = ({ open, onClose }: ModalProps) => {
+  const titleRef = useRef<HTMLInputElement>(null)
+  const linkRef = useRef<HTMLInputElement>(null)
+  const [type, setType] = useState(ContentType.Youtube)
+  const { addContent, loading } = useContentStore()
+  
+  const handleSubmit = async () => {
+    const title = titleRef.current?.value
+    const link = linkRef.current?.value
+    
+    if (!title || !link) {
+      alert("Title and link are required.")
+      return
     }
-  };
-
-  if (!open) return null; // Prevent rendering when modal is closed
-
+    
+    const success = await addContent(title, link, type)
+    
+    if (success) {
+      alert("Content uploaded successfully!")
+      // Clear inputs
+      if (titleRef.current) titleRef.current.value = ""
+      if (linkRef.current) linkRef.current.value = ""
+      // Close modal
+      if (onClose) onClose()
+    }
+  }
+  
+  if (!open) return null
+  
   return (
     <div>
       <div className="w-full h-screen bg-slate-200 fixed top-0 left-0 opacity-60 flex justify-center"></div>
@@ -95,7 +79,7 @@ export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
                 variant="primary"
                 text={loading ? "Submitting..." : "Submit"}
                 size="md"
-                onClick={addContent}
+                onClick={handleSubmit}
                 loading={loading}
               />
             </div>
@@ -103,5 +87,5 @@ export const CreateContentModal = memo(({ open, onClose }: ModalProps) => {
         </div>
       </div>
     </div>
-  );
-});
+  )
+}
