@@ -10,7 +10,7 @@ import useContentStore from '../store/contentStore'
 
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false)
-  const { fetchContents, shareBrain, loading } = useContentStore()
+  const {setFilterType,  fetchContents, shareBrain, loading } = useContentStore()
   
   useEffect(() => {
     // Fetch content when component mounts
