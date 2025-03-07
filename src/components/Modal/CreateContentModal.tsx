@@ -13,6 +13,7 @@ interface ModalProps {
 enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
+  Linkedin = "linkedin"
 }
 
 export const CreateContentModal = ({ open, onClose }: ModalProps) => {
@@ -57,9 +58,9 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
               <Input placeholder="Title" refe={titleRef} />
               <Input placeholder="Link" refe={linkRef} />
             </div>
-            <div>
+            <div className="mb-2">
               <h1>Type</h1>
-              <div className="flex">
+              <div className="flex gap-2 justify-between">
                 <Button
                   text="Youtube"
                   variant={type === ContentType.Youtube ? "primary" : "secondary"}
@@ -70,6 +71,12 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
                   text="Twitter"
                   variant={type === ContentType.Twitter ? "primary" : "secondary"}
                   onClick={() => setType(ContentType.Twitter)}
+                  size="md"
+                />
+                <Button
+                  text = "Linkedin"
+                  variant={type === ContentType.Linkedin ? "primary":"secondary"}
+                  onClick={()=>setType(ContentType.Linkedin)}
                   size="md"
                 />
               </div>

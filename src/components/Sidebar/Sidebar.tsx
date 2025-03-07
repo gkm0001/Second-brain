@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Logout } from "../../icons/Logout";
 import useContentStore from "../../store/contentStore";
 import { HomeIcon } from "../../icons/Home";
+import { Linkedin } from "../../icons/Linkedin";
 
 
 export const Sidebar = memo(() => {
@@ -34,6 +35,7 @@ export const Sidebar = memo(() => {
                <SidebarItems text="Home" icon={<HomeIcon/>} onClick={()=>setFilterType(null)}/>
                <SidebarItems text="Twitter" icon={<Twitter />} onClick={()=>setFilterType("twitter")}/>
                <SidebarItems text="Youtube" icon={<FacebookIcon />} onClick={()=> setFilterType("youtube")}/>
+               <SidebarItems text = "Linkedin" icon={<Linkedin/>} onClick={()=>setFilterType("linkedin")}/>
             </div>
          </div>
 

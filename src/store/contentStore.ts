@@ -7,26 +7,26 @@ interface Content {
   id: string;
   title: string;
   link: string;
-  type: "twitter" | "youtube";
+  type: "twitter" | "youtube" | "linkedin";
 }
 
 interface ContentState {
   filterData:()=>void;
   contents: Content[];
   filterContents: Content[];
-  filterType: "twitter" | "youtube" | null;
+  filterType: "twitter" | "youtube" | "linkedin" | null;
   loading: boolean;
   error: string | null;
 
   fetchContents: () => Promise<Content[]>;
-  addContent: (title: string, link: string, type: "twitter" | "youtube") => Promise<boolean>;
+  addContent: (title: string, link: string, type: "twitter" | "youtube" | "linkedin") => Promise<boolean>;
   updateContent: (id: string, title: string, link: string, type: "twitter" | "youtube") => Promise<boolean>;
-  setFilterType: (type: "twitter" | "youtube" | null) => void;
+  setFilterType: (type: "twitter" | "youtube" | "linkedin" | null) => void;
   shareBrain: () => Promise<string | null>;
 }
 
 const useContentStore = create<ContentState>()(
-  persist(
+ 
     (set, get) => ({
       contents: [],
       filterContents: [],
@@ -152,11 +152,8 @@ const useContentStore = create<ContentState>()(
         }
       },
     }),
-    {
-      name: "content-store", // Name for localStorage key
-      storage: createJSONStorage(() => localStorage), // ✅ Correctly wrap localStorage
-    }
-  )
+  
+  
 );
 
 export default useContentStore;
