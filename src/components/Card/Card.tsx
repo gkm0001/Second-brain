@@ -4,7 +4,7 @@ import { LinkedInEmbed, XEmbed, YouTubeEmbed } from "react-social-media-embed";
 interface CardProps {
   title: string;
   link: string;
-  type: "twitter" | "youtube" | "linkedin";
+  type: "twitter" | "youtube" | "linkedin" | "text" | "image";
   key?: any;
 }
 
@@ -37,10 +37,12 @@ export function Card({ title, link, type }: CardProps) {
         {type === "twitter" && (
             <XEmbed url={link} width="100%" style={{ overflow: 'visible' }}/>
         )}
-        {type == 'linkedin' && (
+        {type === 'linkedin' && (
            <LinkedInEmbed url={link} width="100%" style={{overflow : 'visible'}}/>
-
         )}
+        {/* {type = 'text' && (
+            
+        )} */}
       </div>
     </div>
   );

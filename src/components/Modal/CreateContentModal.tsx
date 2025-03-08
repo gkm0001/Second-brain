@@ -13,7 +13,9 @@ interface ModalProps {
 enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
-  Linkedin = "linkedin"
+  Linkedin = "linkedin",
+  Text = "text",
+  Image = "image",
 }
 
 export const CreateContentModal = ({ open, onClose }: ModalProps) => {

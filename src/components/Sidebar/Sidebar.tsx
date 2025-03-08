@@ -8,6 +8,7 @@ import { Logout } from "../../icons/Logout";
 import useContentStore from "../../store/contentStore";
 import { HomeIcon } from "../../icons/Home";
 import { Linkedin } from "../../icons/Linkedin";
+import { PencilIcon } from "../../icons/Text";
 
 
 export const Sidebar = memo(() => {
@@ -36,6 +37,7 @@ export const Sidebar = memo(() => {
                <SidebarItems text="Twitter" icon={<Twitter />} onClick={()=>setFilterType("twitter")}/>
                <SidebarItems text="Youtube" icon={<FacebookIcon />} onClick={()=> setFilterType("youtube")}/>
                <SidebarItems text = "Linkedin" icon={<Linkedin/>} onClick={()=>setFilterType("linkedin")}/>
+               <SidebarItems text="Text" icon={<PencilIcon/>} onClick={()=>setFilterType("text")}/>
             </div>
          </div>
 

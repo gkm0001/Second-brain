@@ -7,21 +7,23 @@ interface Content {
   id: string;
   title: string;
   link: string;
-  type: "twitter" | "youtube" | "linkedin";
+  type: "twitter" | "youtube" | "linkedin" | "text" | "image";
 }
 
 interface ContentState {
   filterData:()=>void;
   contents: Content[];
   filterContents: Content[];
-  filterType: "twitter" | "youtube" | "linkedin" | null;
+  filterType: "twitter" | "youtube" | "linkedin" | "text" | "image" | null;
   loading: boolean;
   error: string | null;
 
   fetchContents: () => Promise<Content[]>;
-  addContent: (title: string, link: string, type: "twitter" | "youtube" | "linkedin") => Promise<boolean>;
-  updateContent: (id: string, title: string, link: string, type: "twitter" | "youtube") => Promise<boolean>;
-  setFilterType: (type: "twitter" | "youtube" | "linkedin" | null) => void;
+  addContent: (title: string, link: string, type: "twitter" | "youtube" | "linkedin" | "text" | "image") => Promise<boolean>;
+  updateContent: (id: string, title: string, link: string, type: "twitter" | "youtube" | "text" |
+     "linkedin" | "image"
+  ) => Promise<boolean>;
+  setFilterType: (type: "twitter" | "youtube" | "linkedin" | "text"|"image" | null) => void;
   shareBrain: () => Promise<string | null>;
 }
 
