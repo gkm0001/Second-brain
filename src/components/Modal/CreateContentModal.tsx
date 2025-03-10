@@ -1,9 +1,10 @@
 // CreateContentModal.jsx
 import { useRef, useState } from "react"
-import { CrossIcon } from "../../icons/CrossIcon"
+
 import { Button } from "../Button/Button"
 import { Input } from "../Input/Input"
 import useContentStore from "../../store/contentStore"
+import { CrossIcon } from "../../icons/Icon"
 
 interface ModalProps {
   open?: boolean
@@ -48,11 +49,11 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
   if (!open) return null
   
   return (
-    <div>
+    <div >
       <div className="w-full h-screen bg-slate-200 fixed top-0 left-0 opacity-60 flex justify-center"></div>
-      <div className="w-full h-screen fixed top-0 left-0 flex justify-center">
+      <div className="w-full h-screen fixed top-0 left-0 flex justify-center z-10">
         <div className="flex items-center justify-center">
-          <span className="bg-white opacity-100 p-4 rounded fixed">
+          <span className="bg-white opacity-100 p-4 rounded fixed border-2 border-gray-300">
             <div className="flex justify-end cursor-pointer" onClick={onClose}>
               <CrossIcon size="md" />
             </div>

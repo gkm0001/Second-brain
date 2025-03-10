@@ -1,5 +1,6 @@
-import { ShareIcon } from "../../icons/ShareIcon";
+
 import { LinkedInEmbed, XEmbed, YouTubeEmbed } from "react-social-media-embed";
+import { ShareIcon } from "../../icons/Icon";
 
 interface CardProps {
   title: string;

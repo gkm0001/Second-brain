@@ -1,14 +1,11 @@
 import { memo } from "react";
-import { BrainIcon } from "../../icons/Brain";
-import { FacebookIcon } from "../../icons/Facebook";
-import { Twitter } from "../../icons/Twitter";
+
 import { SidebarItems } from "../SidebarItem/SidebarItems";
 import { useNavigate } from "react-router-dom";
-import { Logout } from "../../icons/Logout";
+
 import useContentStore from "../../store/contentStore";
-import { HomeIcon } from "../../icons/Home";
-import { Linkedin } from "../../icons/Linkedin";
-import { PencilIcon } from "../../icons/Text";
+import { BrainIcon, FacebookIcon, HomeIcon, Linkedin, Logout, PencilIcon, Twitter } from "../../icons/Icon";
+
 
 
 export const Sidebar = memo(() => {
