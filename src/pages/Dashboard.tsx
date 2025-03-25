@@ -1,7 +1,6 @@
 // Dashboard.jsx
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import { Button } from '../components/Button/Button'
- 
 import { CreateContentModal } from '../components/Modal/CreateContentModal'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import Cards from './Cards'
@@ -10,12 +9,8 @@ import { PlusIcon, ShareIcon } from '../icons/Icon'
 
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false)
-  const {setFilterType,  fetchContents, shareBrain, loading } = useContentStore()
-  
-  useEffect(() => {
-    // Fetch content when component mounts
-    fetchContents()
-  }, [fetchContents])
+  const { shareBrain, loading} = useContentStore()
+
   
   const handleShare = async () => {
     const url = await shareBrain()

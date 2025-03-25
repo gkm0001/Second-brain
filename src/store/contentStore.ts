@@ -2,33 +2,32 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import axios from "axios";
 
-// Define types for content
 interface Content {
-  id: string;
+  _id: string;
   title: string;
   link: string;
-  type: "twitter" | "youtube" | "linkedin" | "text" | "image";
+  text:string;
+  type: "twitter" | "youtube" | "linkedin" | "article" | "image";
 }
 
 interface ContentState {
-  filterData:()=>void;
+  filterData: () => void;
   contents: Content[];
   filterContents: Content[];
-  filterType: "twitter" | "youtube" | "linkedin" | "text" | "image" | null;
+  filterType: "twitter" | "youtube" | "linkedin" | "article" | "image" | null;
   loading: boolean;
   error: string | null;
-
+  
   fetchContents: () => Promise<Content[]>;
-  addContent: (title: string, link: string, type: "twitter" | "youtube" | "linkedin" | "text" | "image") => Promise<boolean>;
-  updateContent: (id: string, title: string, link: string, type: "twitter" | "youtube" | "text" |
-     "linkedin" | "image"
-  ) => Promise<boolean>;
-  setFilterType: (type: "twitter" | "youtube" | "linkedin" | "text"|"image" | null) => void;
+  addContent: (title: string, link: string,text : string ,  type: Content["type"]) => Promise<boolean>;
+  updateContent: (id: string, title: string, link: string,text : string ,  type: Content["type"]) => Promise<boolean>;
+  deleteContent : (contentId : string) => Promise<boolean>;
+  setFilterType: (type: Content["type"] | null) => void;
   shareBrain: () => Promise<string | null>;
 }
 
 const useContentStore = create<ContentState>()(
- 
+  persist(
     (set, get) => ({
       contents: [],
       filterContents: [],
@@ -36,26 +35,22 @@ const useContentStore = create<ContentState>()(
       loading: false,
       error: null,
 
-      // Set filter type and update filtered contents
       setFilterType: (type) => {
         set({ filterType: type });
         get().filterData();
       },
 
-      // Filter content based on type
       filterData: () => {
         const { contents, filterType } = get();
         set({
-          filterContents: filterType
-            ? contents.filter((item) => item.type === filterType)
-            : contents,
+          filterContents: filterType ? contents.filter((item) => item.type === filterType) : contents,
         });
       },
 
-      // Fetch all content
       fetchContents: async () => {
         set({ loading: true, error: null });
-
+       console.log("how much time");
+       
         try {
           const token = localStorage.getItem("token");
           if (!token) throw new Error("No authentication token found");
@@ -68,7 +63,7 @@ const useContentStore = create<ContentState>()(
           );
 
           set({ contents: response.data.content, loading: false });
-          get().filterData(); // Update filtered content after fetching
+          get().filterData();
           return response.data.content;
         } catch (error) {
           console.error("Error fetching content:", error);
@@ -77,25 +72,22 @@ const useContentStore = create<ContentState>()(
         }
       },
 
-      // Add new content
-      addContent: async (title, link, type) => {
+      addContent: async (title, link , text , type) => {
         set({ loading: true, error: null });
-
+        console.log("how much time");
         try {
           const token = localStorage.getItem("token");
           if (!token) throw new Error("No authentication token found");
 
-            // // Optimistically update state first
-            // set({ contents: [...get().contents, newContent] });
-            // get().filterData(); // ✅ Update filtered data locally
-
-          await axios.post(
+         await axios.post(
             `${import.meta.env.VITE_BACKEND_URL}api/v1/content/uploadContent`,
-            { title, link, type },
+            { title, link,text,  type },
             {
               headers: { Authorization: `Bearer ${token}` },
             }
           );
+          // await get().fetchContents(); // Refresh contents
+          set({ loading: false });  
           return true;
         } catch (error) {
           console.error("Error adding content:", error);
@@ -103,24 +95,46 @@ const useContentStore = create<ContentState>()(
           return false;
         }
       },
+      deleteContent : async(contentId) => {
+         set({loading : true , error : null});
 
-      // Update content
-      updateContent: async (id, title, link, type) => {
+         try {
+          const token = localStorage.getItem("token");
+          if (!token) throw new Error("No authentication token found");
+
+          await axios.post(
+            `${import.meta.env.VITE_BACKEND_URL}api/v1/content/delete`,
+             {contentId},
+             {
+               headers : { Authorization : `Bearer ${token}`},
+             }
+          )
+          await get().filterData();
+          set({ loading: false });  
+          return true;
+         } catch(error){
+          console.error("Error adding content:", error);
+          set({ error: "Failed to add content", loading: false });
+          return false;
+         }
+      },
+
+      updateContent: async (id, title, link, text, type) => {
         set({ loading: true, error: null });
-
+        console.log("how much time");
         try {
           const token = localStorage.getItem("token");
           if (!token) throw new Error("No authentication token found");
 
           await axios.put(
             `${import.meta.env.VITE_BACKEND_URL}api/v1/content/update/${id}`,
-            { title, link, type },
+            { title, link,text, type },
             {
               headers: { Authorization: `Bearer ${token}` },
             }
           );
 
-           await get().filterData(); // Refresh contents
+          await get().filterData();
           return true;
         } catch (error) {
           console.error("Error updating content:", error);
@@ -129,7 +143,6 @@ const useContentStore = create<ContentState>()(
         }
       },
 
-      // Share brain functionality
       shareBrain: async () => {
         set({ loading: true, error: null });
 
@@ -154,8 +167,15 @@ const useContentStore = create<ContentState>()(
         }
       },
     }),
-  
-  
+    {
+      name: "content-storage", // Key for localStorage
+      storage: createJSONStorage(() => localStorage), // Use localStorage
+      partialize: (state) => ({
+        contents: state.contents,
+        filterType: state.filterType,
+      }), // Persist only specific fields
+    }
+  )
 );
 
 export default useContentStore;

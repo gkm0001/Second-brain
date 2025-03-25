@@ -1,6 +1,5 @@
 // CreateContentModal.jsx
 import { useRef, useState } from "react"
-
 import { Button } from "../Button/Button"
 import { Input } from "../Input/Input"
 import useContentStore from "../../store/contentStore"
@@ -15,33 +14,43 @@ enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
   Linkedin = "linkedin",
-  Text = "text",
+  Text = "article",
   Image = "image",
 }
 
 export const CreateContentModal = ({ open, onClose }: ModalProps) => {
   const titleRef = useRef<HTMLInputElement>(null)
   const linkRef = useRef<HTMLInputElement>(null)
-  const [type, setType] = useState(ContentType.Youtube)
+  const textRef = useRef<HTMLInputElement>(null)
+  const [type, setType] = useState(ContentType.Text)
   const { addContent, loading } = useContentStore()
   
   const handleSubmit = async () => {
     const title = titleRef.current?.value
     const link = linkRef.current?.value
-    
-    if (!title || !link) {
+    const text = textRef.current?.value
+
+    if (!title || !link || !text) {
       alert("Title and link are required.")
       return
     }
+
+
+    // const content =  await extractTextFromUrl(link , type)
+    // console.log(title);
+    // console.log(link);
     
-    const success = await addContent(title, link, type)
+    
+    const success = await addContent(title, link, text,  type)
     
     if (success) {
       alert("Content uploaded successfully!")
       // Clear inputs
       if (titleRef.current) titleRef.current.value = ""
       if (linkRef.current) linkRef.current.value = ""
+      if(textRef.current) textRef.current.value = ""
       // Close modal
+      
       if (onClose) onClose()
     }
   }
@@ -60,6 +69,7 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
             <div>
               <Input placeholder="Title" refe={titleRef} />
               <Input placeholder="Link" refe={linkRef} />
+              <Input placeholder="Text" refe={textRef}/>
             </div>
             <div className="mb-2">
               <h1>Type</h1>
