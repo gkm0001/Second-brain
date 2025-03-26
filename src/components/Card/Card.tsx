@@ -5,10 +5,10 @@ import useContentStore from "../../store/contentStore";
 
 interface CardProps {
   title: string;
-  link: string;
-  text: string;
+  link?: string;
+  text?: string;
   contentId : string;
-  type: "twitter" | "youtube" | "linkedin" | "article" | "image";
+  type?: "twitter" | "youtube" | "linkedin" | "article" | "image" | "other";
   key?: any;
 }
 

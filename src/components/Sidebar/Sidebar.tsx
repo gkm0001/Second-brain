@@ -34,7 +34,7 @@ export const Sidebar = memo(() => {
                <SidebarItems text="Twitter" icon={<Twitter />} onClick={()=>setFilterType("twitter")}/>
                <SidebarItems text="Youtube" icon={<FacebookIcon />} onClick={()=> setFilterType("youtube")}/>
                <SidebarItems text = "Linkedin" icon={<Linkedin/>} onClick={()=>setFilterType("linkedin")}/>
-               <SidebarItems text="Text" icon={<PencilIcon/>} onClick={()=>setFilterType("text")}/>
+               {/* <SidebarItems text="Text" icon={<PencilIcon/>} onClick={()=>setFilterType("text")}/> */}
             </div>
          </div>
 

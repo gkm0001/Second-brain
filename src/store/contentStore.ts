@@ -2,25 +2,27 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import axios from "axios";
 
+type ContentType = "twitter" | "youtube" | "linkedin" | "image" | "other";
+
 interface Content {
   _id: string;
   title: string;
-  link: string;
-  text:string;
-  type: "twitter" | "youtube" | "linkedin" | "article" | "image";
+  link ?: string;
+  text ?:string;
+  type ?: ContentType;
 }
 
 interface ContentState {
   filterData: () => void;
   contents: Content[];
   filterContents: Content[];
-  filterType: "twitter" | "youtube" | "linkedin" | "article" | "image" | null;
+  filterType :ContentType | null;
   loading: boolean;
   error: string | null;
   
   fetchContents: () => Promise<Content[]>;
-  addContent: (title: string, link: string,text : string ,  type: Content["type"]) => Promise<boolean>;
-  updateContent: (id: string, title: string, link: string,text : string ,  type: Content["type"]) => Promise<boolean>;
+  addContent: (title: string, link ?: string ,text ?: string  ,  type ?: Content["type"]) => Promise<boolean>;
+  updateContent: (id: string, title: string, link ?: string ,text ?: string ,  type ?: Content["type"]) => Promise<boolean>;
   deleteContent : (contentId : string) => Promise<boolean>;
   setFilterType: (type: Content["type"] | null) => void;
   shareBrain: () => Promise<string | null>;

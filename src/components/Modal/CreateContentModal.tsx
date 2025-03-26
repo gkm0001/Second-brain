@@ -14,33 +14,26 @@ enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
   Linkedin = "linkedin",
-  Text = "article",
   Image = "image",
+  other = "other"
 }
 
 export const CreateContentModal = ({ open, onClose }: ModalProps) => {
   const titleRef = useRef<HTMLInputElement>(null)
   const linkRef = useRef<HTMLInputElement>(null)
   const textRef = useRef<HTMLInputElement>(null)
-  const [type, setType] = useState(ContentType.Text)
+  const [type, setType] = useState(ContentType.other)
   const { addContent, loading } = useContentStore()
   
   const handleSubmit = async () => {
     const title = titleRef.current?.value
-    const link = linkRef.current?.value
-    const text = textRef.current?.value
+    const link = linkRef.current?.value || ''
+    const text = textRef.current?.value || ''
 
-    if (!title || !link || !text) {
-      alert("Title and link are required.")
+    if (!title ) {
+      alert("Title are required ")
       return
     }
-
-
-    // const content =  await extractTextFromUrl(link , type)
-    // console.log(title);
-    // console.log(link);
-    
-    
     const success = await addContent(title, link, text,  type)
     
     if (success) {
@@ -68,8 +61,8 @@ export const CreateContentModal = ({ open, onClose }: ModalProps) => {
             </div>
             <div>
               <Input placeholder="Title" refe={titleRef} />
-              <Input placeholder="Link" refe={linkRef} />
-              <Input placeholder="Text" refe={textRef}/>
+              <Input placeholder="Link (optional)" refe={linkRef} />
+              <Input placeholder="Text (optional)" refe={textRef}/>
             </div>
             <div className="mb-2">
               <h1>Type</h1>
