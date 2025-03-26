@@ -8,7 +8,7 @@ interface CardProps {
   link?: string;
   text?: string;
   contentId : string;
-  type?: "twitter" | "youtube" | "linkedin" | "article" | "image" | "other";
+  type?: "twitter" | "youtube" | "linkedin" | "image" | "other";
   key?: any;
 }
 
@@ -43,7 +43,7 @@ export function Card({ title, link, type,text , contentId}: CardProps) {
           <a href={link} target="_blank" className="text-gray-500">
             <ShareIcon size="md" />
           </a>
-          <div className="text-gray-500" onClick={handleDelete}>
+          <div className="text-gray-500 cursor-pointer" onClick={handleDelete}>
             <DeleteIcon/>
           </div>
         </div>

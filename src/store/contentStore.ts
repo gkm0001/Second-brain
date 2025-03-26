@@ -88,8 +88,9 @@ const useContentStore = create<ContentState>()(
               headers: { Authorization: `Bearer ${token}` },
             }
           );
-          // await get().fetchContents(); // Refresh contents
+           await get().fetchContents(); // Refresh contents
           set({ loading: false });  
+          
           return true;
         } catch (error) {
           console.error("Error adding content:", error);
@@ -111,7 +112,7 @@ const useContentStore = create<ContentState>()(
                headers : { Authorization : `Bearer ${token}`},
              }
           )
-          await get().filterData();
+          await get().fetchContents(); // Refresh contents
           set({ loading: false });  
           return true;
          } catch(error){
