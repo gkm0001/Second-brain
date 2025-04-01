@@ -24,7 +24,7 @@ import { memo, type ReactElement } from "react";
      "md":"py-2 px-4 text-md rounded-md",
      "lg":"py-4 px-6 text-xl rounded-sm"
  }
- const defaultStyles = "rounded-md font-light flex hover:opacity-60"
+ const defaultStyles = "rounded-md font-light flex hover:opacity-60 cursor-pointer"
  
  export const Button = memo((props : ButtonProps) => {
   const {fullWidth,variant,size,startIcon,text,endIcon,loading,onClick} = props
