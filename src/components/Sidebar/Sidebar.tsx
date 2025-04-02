@@ -4,7 +4,7 @@ import { SidebarItems } from "../SidebarItem/SidebarItems";
 import { useNavigate } from "react-router-dom";
 
 import useContentStore from "../../store/contentStore";
-import { BrainIcon, FacebookIcon, HomeIcon, Linkedin, Logout, PencilIcon, Twitter } from "../../icons/Icon";
+import { BrainIcon, FacebookIcon, HomeIcon, Linkedin, Logout, Twitter } from "../../icons/Icon";
 
 
 

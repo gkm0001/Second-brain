@@ -18,7 +18,6 @@ function App() {
                 {/* Private Routes */}
               <Route element={<ProtectedRoute/>}>
                 <Route path='/' element={<Dashboard/>}/>
-                <Route path='/share/:shareId' element={<Dashboard/>}/>
               </Route>
             </Routes>
          

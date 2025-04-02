@@ -1,4 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
 import { DeleteIcon, ShareIcon } from "../../icons/Icon";
 import { useEffect, useState } from "react";
 import useContentStore from "../../store/contentStore";
@@ -12,8 +11,8 @@ interface CardProps {
   key?: any;
 }
 
-export function Card({ title, link, type,text , contentId}: CardProps) {
-  const [isMounted, setIsMounted] = useState(false);
+export function Card({ title, link,text , contentId}: CardProps) {
+  const [, setIsMounted] = useState<boolean>(false);
   const { deleteContent} = useContentStore();
 
   useEffect(() => {

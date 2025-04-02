@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { Card } from "../components/Card/Card";
 import useContentStore from "../store/contentStore";
 
