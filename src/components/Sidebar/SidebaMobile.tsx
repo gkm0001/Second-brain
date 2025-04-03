@@ -1,24 +1,23 @@
-
 import { Home, Twitter, Youtube, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "react-router-dom";
 import useContentStore from "@/store/contentStore";
 
-export  function Sidebar() {
-    const navigate = useNavigate();
-    const { setFilterType } = useContentStore();
+export  function SidebarMobile() {
+  const navigate = useNavigate();
+  const { setFilterType } = useContentStore();
 
-    const logout = () => {
-        localStorage.removeItem("token");
-        window.dispatchEvent(new Event("storage")); // Notify all tabs
-        navigate("/");    
-     };
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.dispatchEvent(new Event("storage")); // Notify all tabs
+    navigate("/");    
+ };
 
   return (
-    <div className="w-64 border-r border-zinc-100 bg-white flex flex-col h-full fixed left-0 top-0">
-      <div className="p-4 border-b border-zinc-100">
-        <a href="/" className="flex items-center gap-2 text-xl font-bold text-black">
-          <div className="bg-black text-white p-1.5 rounded-full">
+    <div className="flex flex-col h-full bg-black text-white">
+      <div className="p-4 border-b border-zinc-800">
+        <a href="/" className="flex items-center gap-2 text-xl font-bold">
+          <div className="bg-white text-black p-1.5 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -39,22 +38,22 @@ export  function Sidebar() {
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
-        <button onClick={()=>setFilterType(null)} className="flex items-center gap-3 px-3 py-2 text-zinc-800 rounded-lg hover:bg-zinc-50">
+        <button  className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800" onClick={()=>setFilterType(null)}>
           <Home className="h-5 w-5" />
-          <span>Home</span>
+          <span className="font-medium">Home</span>
         </button>
 
-        <button onClick={()=>setFilterType("twitter")} className="flex items-center gap-3 px-3 py-2 text-zinc-800 rounded-lg hover:bg-zinc-50">
+        <button  className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800" onClick={()=>setFilterType("twitter")}>
           <Twitter className="h-5 w-5" />
-          <span>Twitter</span>
+          <span className="font-medium">Twitter</span>
         </button>
 
-        <button  onClick={()=>setFilterType("youtube")} className="flex items-center gap-3 px-3 py-2 text-zinc-800 rounded-lg hover:bg-zinc-50">
+        <button className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800" onClick={()=>setFilterType("youtube")}>
           <Youtube className="h-5 w-5" />
-          <span>Youtube</span>
+          <span className="font-medium">Youtube</span>
         </button>
 
-        <button onClick={()=>setFilterType("linkedin")} className="flex items-center gap-3 px-3 py-2 text-zinc-800 rounded-lg hover:bg-zinc-50">
+        <button className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800" onClick={()=>setFilterType("linkedin")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -71,13 +70,13 @@ export  function Sidebar() {
             <rect x="2" y="9" width="4" height="12"></rect>
             <circle cx="4" cy="4" r="2"></circle>
           </svg>
-          <span>Linkedin</span>
+          <span className="font-medium">Linkedin</span>
         </button>
       </nav>
 
-      <div className="p-4 border-t border-zinc-100">
-        <Button variant="ghost" className="w-full justify-start text-zinc-800 hover:bg-zinc-50 cursor-pointer" onClick={logout}>
-          <LogOut className="h-5 w-5 mr-3 cursor-pointer"/>
+      <div className="p-4 border-t border-zinc-800">
+        <Button variant="ghost" className="w-full justify-start text-white hover:bg-zinc-800 cursor-pointer" onClick={logout}>
+          <LogOut className="h-5 w-5 mr-3 cursor-pointer" />
           Logout
         </Button>
       </div>

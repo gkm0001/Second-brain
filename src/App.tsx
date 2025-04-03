@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Signin } from './pages/Signin'
-import { Signup } from './pages/Signup'
 import ProtectedRoute from './Auth/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
+import { SignUp } from './pages/Signup'
+import { SignIn } from './pages/Signin'
 
 function App() {
 
@@ -12,8 +12,8 @@ function App() {
       <BrowserRouter>
             <Routes>
               {/* Public Routes */}
-                <Route path='/signup' element={<Signup/>}/>
-                <Route path='/login' element={<Signin/>}/>
+                <Route path='/signup' element={<SignUp/>}/>
+                <Route path='/login' element={<SignIn/>}/>
 
                 {/* Private Routes */}
               <Route element={<ProtectedRoute/>}>

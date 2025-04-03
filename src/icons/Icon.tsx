@@ -68,5 +68,5 @@ export const DeleteIcon = () => {
 }
 
 export const SendIcon = () => (
-  <img width="20" height="20" src="https://img.icons8.com/material-outlined/24/sent.png" alt="sent"/>
+  <img width="16" height="16" src="https://img.icons8.com/material-outlined/24/sent.png" alt="sent"/>
 )
