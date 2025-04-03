@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Send, Share2, Trash2, Menu, Plus } from "lucide-react"
+import { Send, Share2, Menu, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
@@ -19,17 +19,17 @@ interface Message {
 
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false)
-  const { shareBrain, loading, filterType } = useContentStore()
+  const { filterType } = useContentStore()
   const [chatMessages, setChatMessages] = useState<Message[]>([])
   const [inputText, setInputText] = useState("")
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
-  const handleShare = async () => {
-    const url = await shareBrain()
-    if (url) {
-      console.log("Share URL:", url)
-    }
-  }
+  // const handleShare = async () => {
+  //   const url = await shareBrain()
+  //   if (url) {
+  //     console.log("Share URL:", url)
+  //   }
+  // }
 
   const sendMessage = async () => {
     if (!inputText.trim()) return
@@ -112,14 +112,14 @@ function Dashboard() {
         <div className="space-y-3 md:space-y-4">
           {chatMessages.map((msg, index) => (
             <Card key={index} className="p-3 shadow-sm rounded-xl border border-zinc-100">
-              <div className={`p-3 max-w-md rounded-lg shadow-md ${msg.role === "user" ? "bg-blue-500 text-white self-end" : "bg-gray-200"}`}>
+              <div className={`p-3 max-w-md rounded-lg shadow-md ${msg.role === "user" ? "bg-black text-white self-end" : "bg-gray-200"}`}>
                 <strong>{msg.role === "user" ? "You" : "ChatGPT"}:</strong> {msg.text}
               </div>
             </Card>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        <div className="">
           <Cards />
         </div>
       </main>

@@ -1,6 +1,7 @@
-import { DeleteIcon, ShareIcon } from "../../icons/Icon";
+import { ShareIcon } from "../../icons/Icon";
 import { useEffect, useState } from "react";
 import useContentStore from "../../store/contentStore";
+import { Trash } from "lucide-react";
 
 interface CardProps {
   title: string;
@@ -43,7 +44,7 @@ export function Card({ title, link,text , contentId}: CardProps) {
             <ShareIcon size="md" />
           </a>
           <div className="text-gray-500 cursor-pointer" onClick={handleDelete}>
-            <DeleteIcon/>
+            <Trash className="w-5 h-5"/>
           </div>
         </div>
       </div>
