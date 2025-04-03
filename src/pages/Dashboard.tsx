@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Send, Share2, Menu, Plus } from "lucide-react"
+import { Send, Share2, Menu, Plus, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
@@ -21,6 +21,7 @@ function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false)
   const { filterType } = useContentStore()
   const [chatMessages, setChatMessages] = useState<Message[]>([])
+  const [loading , setloading] = useState<boolean>(false)
   const [inputText, setInputText] = useState("")
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
@@ -32,8 +33,9 @@ function Dashboard() {
   // }
 
   const sendMessage = async () => {
+    setloading(true)
     if (!inputText.trim()) return
-
+   
     try {
       const token = localStorage.getItem("token")
       if (!token) throw new Error("No authentication token found")
@@ -52,7 +54,10 @@ function Dashboard() {
       setInputText("")
     } catch (error) {
       console.error("Error sending message:", error)
+    }finally{
+      setloading(false)
     }
+   
   }
 
   return (
@@ -103,7 +108,7 @@ function Dashboard() {
                 size="icon"
                 className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-black hover:bg-zinc-800 rounded-full w-9 h-9"
               >
-                <Send className="h-4 w-4"/>
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>
           </form>
@@ -119,7 +124,7 @@ function Dashboard() {
           ))}
         </div>
 
-        <div className="">
+        <div className="mt-3">
           <Cards />
         </div>
       </main>
