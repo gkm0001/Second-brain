@@ -15,6 +15,10 @@ interface CardProps {
 export function Card({ title, link,text , contentId}: CardProps) {
   const [, setIsMounted] = useState<boolean>(false);
   const { deleteContent} = useContentStore();
+  console.log("text",text);
+  console.log("title",title);
+  
+  
 
   useEffect(() => {
     setIsMounted(true);

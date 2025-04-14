@@ -20,10 +20,12 @@ const Cards = () => {
   if (!filterContents || filterContents.length === 0) {
     return <div className="w-full text-center p-4">No content available. Add some content to get started!</div>;
   }
+console.log(filterContents);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {filterContents.map(({ type, link, title , text , _id}, index) => (
+        
         <Card key={`${title}-${index}`} type={type} link={link} title={title} text={text} contentId = {_id}/>
       ))}
     </div>

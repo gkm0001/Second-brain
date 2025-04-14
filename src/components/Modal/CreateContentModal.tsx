@@ -63,7 +63,8 @@ export function CreateContentModal({ open, onClose }: ModalProps) {
       alert("Title is required")
       return
     }
-
+   console.log("texts",text);
+   
     const success = await addContent(title, link, text, type)
 
     if (success) {
